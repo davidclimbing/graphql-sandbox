@@ -1,0 +1,23 @@
+{
+  "name": "graphql-sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.14.0",
+  "dependencies": {
+    "@types/node": "^22.2.0",
+    "apollo-server": "^3.13.0",
+    "graphql": "^16.11.0",
+    "node": "^22.18.0",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0"
+  }
+}
