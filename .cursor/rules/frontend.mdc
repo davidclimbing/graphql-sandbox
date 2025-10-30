@@ -1,0 +1,7 @@
+---
+globs: *tsx
+alwaysApply: false
+---
+- 반드시 react 19.2, Tailwind v4 사용
+- 반드시 Package manager 는 pnpm
+<!-- - GraphQL API의 명세는 schema.graphql을 참고할 것 -->
