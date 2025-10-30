@@ -75,3 +75,4 @@ const server = new ApolloServer({ typeDefs, resolvers });
 server.listen().then(({ url }: { url: string }) => {
   console.log(`서버가 ${url}에서 준비되었습니다.`);
 });
+

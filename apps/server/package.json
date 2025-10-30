@@ -1,0 +1,19 @@
+{
+  "name": "@graphql-sandbox/server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "start": "tsx index.ts",
+    "dev": "tsx watch index.ts"
+  },
+  "dependencies": {
+    "@types/node": "^22.2.0",
+    "apollo-server": "^3.13.0",
+    "graphql": "^16.11.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.6"
+  }
+}
+
