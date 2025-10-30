@@ -1,0 +1,32 @@
+name: Gemini Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  code-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Gemini Code Review
+        uses: google/generative-ai-docs/gemini-code-review@main
+        with:
+          review_level: detailed
+          focus_areas: |
+            - Code quality and best practices
+            - Potential bugs and edge cases
+            - Performance improvements
+            - Security vulnerabilities
+            - Type safety (TypeScript)
+            - React best practices
+          language: ko
