@@ -21,8 +21,6 @@ jobs:
       - name: Gemini Code Review
         uses: google/generative-ai-docs/gemini-code-review@main
         with:
-          google_api_key: ${{ secrets.GEMINI_API_KEY }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           review_level: detailed
           focus_areas: |
             - Code quality and best practices
