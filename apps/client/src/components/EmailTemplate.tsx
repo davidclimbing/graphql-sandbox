@@ -1,31 +1,29 @@
 import { useState, useEffect } from 'react';
+import DOMPurify from 'dompurify';
 
-interface EmailTemplateProps {
-  apiEndpoint: string;
-}
-
-export function EmailTemplate({ apiEndpoint }: EmailTemplateProps) {
+export function EmailTemplate({ apiEndpoint }: { apiEndpoint: string }) {
   const [htmlContent, setHtmlContent] = useState<string>('');
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(apiEndpoint)
       .then(res => res.json())
       .then(data => {
-        setHtmlContent(data.htmlContent);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Failed to load email template:', err);
-        setLoading(false);
+        // HTML sanitize
+        const cleanHTML = DOMPurify.sanitize(data.htmlContent, {
+          WHOLE_DOCUMENT: true,
+          ADD_TAGS: ['link', 'style'],
+          ADD_ATTR: ['target', 'href', 'src', 'alt', 'class', 'id', 'style'],
+          ALLOW_DATA_ATTR: false,
+          FORBID_TAGS: ['script', 'title'],
+          FORBID_ATTR: ['onerror', 'onload']
+        });
+        setHtmlContent(cleanHTML);
       });
   }, [apiEndpoint]);
 
-  if (loading) return <div>Loading...</div>;
-
   return (
-    <div
-      className="email-container"
+    <div 
+      className="email-preview"
       dangerouslySetInnerHTML={{ __html: htmlContent }}
     />
   );

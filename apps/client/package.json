@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "@apollo/client": "^3.11.8",
+    "dompurify": "^3.2.2",
     "graphql": "^16.11.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.16",
+    "@types/dompurify": "^3.0.5",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^4.3.3",
