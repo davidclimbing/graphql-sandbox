@@ -15,6 +15,18 @@ jobs:
       contains(github.event.comment.body, '/gemini review')
 
     steps:
+      - name: Check PR Target Branch
+        id: check-target
+        run: |
+          PR_JSON=$(gh api repos/${{ github.repository }}/pulls/${{ github.event.issue.number }})
+          BASE_BRANCH=$(echo $PR_JSON | jq -r .base.ref)
+          if [ "$BASE_BRANCH" != "main" ]; then
+            echo "This PR is not targeting main branch (targeting: $BASE_BRANCH). Skipping review."
+            exit 78
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB }}
+
       - name: Checkout Repo
         uses: actions/checkout@v4
         with:
@@ -27,11 +39,4 @@ jobs:
           echo "head_sha=$(echo $PR_JSON | jq -r .head.sha)" >> $GITHUB_OUTPUT
           echo "base_sha=$(echo $PR_JSON | jq -r .base.sha)" >> $GITHUB_OUTPUT
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Gemini AI Code Reviewer
-        uses: truongnh1992/gemini-ai-code-reviewer@main
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL: gemini-2.0-flash-exp
+          GITHUB_TOKEN: ${{ secrets.GITHUB }}
